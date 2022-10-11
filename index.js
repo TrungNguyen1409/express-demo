@@ -16,6 +16,9 @@ app.get('/api/courses/:id',(req,res)=>{
     res.send(req.params.id);
 })
 
+app.get('/api/posts/:year/:month',(req,res)=>{
+    res.send(req.params);
+})
 
 // PORTs
 const port = process.env.PORT || 3000;
