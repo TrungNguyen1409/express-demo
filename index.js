@@ -1,3 +1,4 @@
+const Joi = require('joi');
 const express = require('express');
 const app = express();
 
@@ -20,6 +21,12 @@ app.get('/api/courses', (req,res)=>{
 
 app.post('/api/courses', (req,res)=> {
 
+    const schema = {
+        name :Joi.string().min(3).required()
+    };
+
+    const result = Joi.validate(req.body, schema)
+    console.log(result)
     if(!req.body.name || req.body.name.length <3){
         // 400 Bad Request
         res.status(400).send('Name is required and should be min 3 charaters')
@@ -43,6 +50,6 @@ app.get('/api/courses/:id',(req,res)=>{
 
 
 
-// PORTs
+// PORT
 const port = process.env.PORT || 3000;
 app.listen(port, () => console.log(`Listening on port ${port} ...`))
